@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Informações sobre Advocacia</title>
+  <meta name="description" content="Site informativo e didático sobre advocacia: história, funções, áreas do Direito, ética e OAB, mercado de trabalho, procedimentos e curiosidades." />
+  <style>
+    /* ======= RESET & TOKENS ======= */
+    :root{
+      --bg:#f7f8fb;
+      --paper:#ffffff;
+      --ink:#0f172a;
+      --muted:#848991;
+      --accent:#2b2f3f;
+      --accent-2:#363a42;
+      --border:#e5e7eb;
+      --radius:14px;
+      --shadow: 0 10px 30px rgba(2,6,23,.08);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--ink); font-family: var(--sans);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; line-height:1.55;
+    }
+    a{color:var(--accent-2); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* ======= HEADER ======= */
+    .site-header{
+      position:sticky; top:0; z-index:60; background:rgba(255,255,255,.9); backdrop-filter: blur(8px);
+      border-bottom:1px solid var(--border);
+    }
+    .wrap{max-width:1200px; margin:0 auto; padding:16px 20px}
+    .brandbar{display:flex; align-items:center; gap:16px; justify-content:space-between}
+    .logo{margin:0; font-weight:800; letter-spacing:.2px; color:var(--accent)}
+    .nav{display:flex; gap:14px; flex-wrap:wrap}
+    .nav a{font-weight:600; color:#0f172a}
+    .nav a:hover{color:var(--accent-2)}
+    .toolbar{display:flex; gap:10px; align-items:center}
+    .search{
+      padding:8px 12px; border:1px solid var(--border); border-radius:999px; min-width:220px; background:#fff;
+    }
+
+    /* ======= LAYOUT ======= */
+    .hero{
+      background:linear-gradient(180deg, #eef2ff 0%, #f7f8fb 100%);
+      border-bottom:1px solid var(--border);
+    }
+    .hero .wrap{display:flex; gap:28px; align-items:center; padding:28px 20px}
+    .hero h2{margin:0 0 6px; font-size:1.8rem; color:#0b1b4a}
+    .hero p{margin:0; color:var(--muted)}
+    .hero .cta{margin-top:12px; display:flex; gap:10px}
+    .btn{background:var(--accent-2); color:#fff; border:0; border-radius:10px; padding:10px 14px; font-weight:700; cursor:pointer}
+    .btn.alt{background:#fff; color:var(--accent-2); border:1px solid var(--accent-2)}
+
+    .main{
+      max-width:1200px; margin:0 auto; padding:22px 20px; display:grid; grid-template-columns:280px 1fr; gap:22px;
+    }
+    aside{
+      position:sticky; top:92px; align-self:start; background:var(--paper); border:1px solid var(--border); border-radius:var(--radius);
+      padding:16px; box-shadow: var(--shadow);
+    }
+    aside h3{margin-top:0}
+    .toc{list-style:none; padding-left:14px; margin:0}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--accent-2); font-weight:600}
+
+    article{
+      min-width:0;
+    }
+    .card{
+      background:var(--paper); border:1px solid var(--border); border-radius:var(--radius);
+      padding:18px 18px; margin-bottom:18px; box-shadow: var(--shadow);
+    }
+    .card h2{margin-top:0; color:#0b1b4a}
+    .sub{color:var(--muted); margin-top:-6px; margin-bottom:10px}
+    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .note{background:#f1f5f9; border-left:4px solid var(--accent-2); padding:12px; border-radius:10px}
+
+    dl{margin:0}
+    dt{font-weight:800; margin-top:8px}
+    dd{margin:0 0 6px 0}
+
+    .kbd{font-family:var(--mono); background:#0b1220; color:#e6eef8; padding:8px 10px; border-radius:10px; overflow:auto}
+
+    /* Accordion */
+    .acc-item{
+      width:100%; text-align:left; padding:12px; border-radius:10px; border:1px solid var(--border);
+      background:#fff; font-weight:700; cursor:pointer; margin-top:10px;
+    }
+    .acc-panel{display:none; padding:10px 12px 4px}
+
+    /* Footer */
+    .site-footer{border-top:1px solid var(--border); background:#fff}
+    .site-footer .wrap{display:flex; flex-direction:column; gap:8px}
+    .fine{color:var(--muted); font-size:.95rem}
+
+    /* To top */
+    .to-top{position:fixed; right:20px; bottom:24px; background:var(--accent-2); color:#fff; border:0; padding:10px 12px; border-radius:999px; display:none; cursor:pointer; box-shadow: var(--shadow)}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .main{grid-template-columns:1fr}
+      aside{position:relative; top:auto}
+      .nav{display:none}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="wrap brandbar">
+      <h1 class="logo">Informações sobre Advocacia</h1>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#introducao">Introdução</a>
+        <a href="#historia">História</a>
+        <a href="#funcoes">Funções</a>
+        <a href="#areas">Áreas</a>
+        <a href="#etica">Ética & OAB</a>
+        <a href="#mercado">Mercado</a>
+        <a href="#procedimentos">Procedimentos</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="toolbar">
+        <input id="search" class="search" placeholder="Buscar no conteúdo…" aria-label="Buscar no conteúdo"/>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio" aria-label="Abertura">
+    <div class="wrap">
+      <div>
+        <h2>Informação jurídica clara e organizada</h2>
+        <p>Este site reúne conteúdos informativos sobre a advocacia: origem, funções sociais, ramos do Direito, ética profissional, mercado de trabalho, procedimentos essenciais e curiosidades.</p>
+        <div class="cta">
+          <a class="btn" href="#introducao">Ler agora</a>
+          <a class="btn alt" href="#modelos">Modelos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- TOC -->
+    <aside aria-label="Índice">
+      <h3>Índice do conteúdo</h3>
+      <ul id="toc" class="toc"></ul>
+      <p class="fine">Conteúdo informativo. <strong>Não substitui</strong> orientação profissional.</p>
+    </aside>
+
+    <!-- CONTENT -->
+    <article id="content">
+
+      <!-- INTRODUÇÃO -->
+      <section class="card" id="introducao">
+        <h2>1. Introdução à Advocacia</h2>
+        <p class="sub">Conceito, papel social e distinções importantes.</p>
+        <p>A advocacia é a atividade profissional dedicada à orientação jurídica, representação e defesa de interesses individuais e coletivos perante órgãos públicos e privados. Enquanto a <em>magistratura</em> julga e o <em>Ministério Público</em> promove a tutela de interesses sociais/estatais, a advocacia exerce função essencial à Justiça ao garantir a efetividade do contraditório e da ampla defesa. O exercício profissional, em regra, depende de habilitação regular em entidade de classe e observância a normas de ética.</p>
+        <div class="note"><strong>Essência:</strong> informar, aconselhar, prevenir litígios, negociar soluções e, quando necessário, litigar com técnica e responsabilidade.</div>
+      </section>
+
+      <!-- HISTÓRIA -->
+      <section class="card" id="historia">
+        <h2>2. História da Advocacia</h2>
+        <p class="sub">Das origens clássicas à institucionalização moderna.</p>
+        <div class="grid-2">
+          <div>
+            <h3>2.1. Antiguidade</h3>
+            <p>Na Grécia, oradores defendiam causas nas ágoras; em Roma, o <em>orator</em> e, mais tarde, os <em>advocati</em> passaram a atuar com maior formalidade, influenciando profundamente os sistemas de <em>civil law</em> contemporâneos.</p>
+            <h3>2.2. Idade Média e Modernidade</h3>
+            <p>Com o fortalecimento das universidades e do estudo do <em>Corpus Iuris Civilis</em>, a profissão ganhou contornos técnicos. Corporações e ordens passaram a disciplinar o ofício, exigindo formação e padrões éticos.</p>
+          </div>
+          <div>
+            <h3>2.3. Contemporaneidade</h3>
+            <p>O século XX consolidou escritórios profissionais, departamentos jurídicos e especializações. A globalização e a transformação digital ampliaram ramos como propriedade intelectual, concorrencial, proteção de dados e tecnologia.</p>
+            <h3>2.4. Brasil (panorama)</h3>
+            <p>No Brasil, a organização profissional se estruturou com estatutos próprios, exame de habilitação e atuação em todas as instâncias, inclusive nos tribunais superiores, respeitando prerrogativas legais.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FUNÇÕES -->
+      <section class="card" id="funcoes">
+        <h2>3. Funções da Advocacia</h2>
+        <p class="sub">Atuação consultiva, preventiva, contenciosa e estratégica.</p>
+        <div class="grid-2">
+          <div>
+            <h3>3.1. Consultoria e prevenção</h3>
+            <ul>
+              <li>Análise de riscos jurídicos em contratos e operações.</li>
+              <li>Estruturação de políticas de compliance e governança.</li>
+              <li>Mediação e negociação de acordos para evitar litígios.</li>
+            </ul>
+            <h3>3.2. Contencioso</h3>
+            <ul>
+              <li>Elaboração de peças processuais e sustentações.</li>
+              <li>Acompanhamento de prazos, provas e audiências.</li>
+              <li>Recursos e medidas urgentes (cautelares/liminares).</li>
+            </ul>
+          </div>
+          <div>
+            <h3>3.3. Estratégia e soluções</h3>
+            <ul>
+              <li>Due diligence em operações societárias.</li>
+              <li>Defesa de direitos fundamentais e interesses coletivos.</li>
+              <li>Arbitragem e resolução alternativa de conflitos (ADR).</li>
+            </ul>
+            <h3>3.4. Educação e cidadania</h3>
+            <ul>
+              <li>Orientação jurídica à população e entidades.</li>
+              <li>Atuação pro bono e projetos sociais.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ÁREAS DO DIREITO -->
+      <section class="card" id="areas">
+        <h2>4. Áreas do Direito (principais ramos)</h2>
+        <p class="sub">Descrição objetiva das frentes mais demandadas.</p>
+
+        <div class="grid-3">
+          <div>
+            <h3>4.1. Civil</h3>
+            <p>Pessoas, família e sucessões, contratos, responsabilidade civil e direitos reais (posse, propriedade, garantias).</p>
+            <ul>
+              <li>Contratos e consumo</li><li>Indenizações</li><li>Inventários</li><li>Imobiliário</li>
+            </ul>
+          </div>
+          <div>
+            <h3>4.2. Empresarial</h3>
+            <p>Sociedades, contratos empresariais, títulos de crédito, falência e recuperação, propriedade intelectual aplicada a negócios.</p>
+          </div>
+          <div>
+            <h3>4.3. Trabalhista & Previdenciário</h3>
+            <p>Relações de trabalho, verbas, rescisões, saúde e segurança, benefícios e contribuições previdenciárias.</p>
+          </div>
+
+          <div>
+            <h3>4.4. Penal</h3>
+            <p>Crimes, penas, medidas cautelares, garantias individuais e execução penal.</p>
+          </div>
+          <div>
+            <h3>4.5. Tributário</h3>
+            <p>Tributos, competências, planejamento lícito, contencioso administrativo e judicial, repetição de indébito.</p>
+          </div>
+          <div>
+            <h3>4.6. Administrativo</h3>
+            <p>Atos administrativos, licitações/contratos públicos, improbidade, servidores e controle estatal.</p>
+          </div>
+
+          <div>
+            <h3>4.7. Constitucional</h3>
+            <p>Estrutura do Estado, direitos e garantias fundamentais, controle de constitucionalidade.</p>
+          </div>
+          <div>
+            <h3>4.8. Ambiental</h3>
+            <p>Licenciamento, responsabilidade ambiental, compliance ESG, unidades de conservação e sanções.</p>
+          </div>
+          <div>
+            <h3>4.9. Digital & Proteção de Dados</h3>
+            <p>Privacidade, segurança da informação, contratos digitais, incidentes e governança de dados.</p>
+          </div>
+
+          <div>
+            <h3>4.10. Internacional</h3>
+            <p>Tratados, direito internacional público e privado, arbitragem internacional e comércio exterior.</p>
+          </div>
+          <div>
+            <h3>4.11. Consumidor</h3>
+            <p>Práticas comerciais, cláusulas abusivas, vício e defeito, responsabilidade do fornecedor.</p>
+          </div>
+          <div>
+            <h3>4.12. Propriedade Intelectual</h3>
+            <p>Marcas, patentes, direitos autorais, segredos de negócio e concorrência desleal.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ÉTICA & OAB -->
+      <section class="card" id="etica">
+        <h2>5. Ética Profissional e Ordem</h2>
+        <p class="sub">Princípios, publicidade, impedimentos e prerrogativas.</p>
+        <div class="grid-2">
+          <div>
+            <h3>5.1. Princípios essenciais</h3>
+            <ul>
+              <li><strong>Independência técnica:</strong> atuação livre de pressões indevidas.</li>
+              <li><strong>Sigilo profissional:</strong> proteção da confidencialidade do cliente.</li>
+              <li><strong>Lealdade processual:</strong> boa-fé, urbanidade e veracidade.</li>
+              <li><strong>Zelo e diligência:</strong> atualização constante e cumprimento de prazos.</li>
+            </ul>
+            <h3>5.2. Publicidade</h3>
+            <p>A comunicação deve ser informativa, discreta e verdadeira, vedada captação indevida de clientela e autopromoção sensacionalista.</p>
+          </div>
+          <div>
+            <h3>5.3. Impedimentos e incompatibilidades</h3>
+            <p>Determinadas funções públicas ou cargos podem ser incompatíveis com a advocacia; outras geram impedimento parcial.</p>
+            <h3>5.4. Prerrogativas</h3>
+            <p>Direitos garantidos para o exercício pleno da defesa (acesso a autos, comunicação reservada, inviolabilidade do local de trabalho, dentre outros).</p>
+          </div>
+        </div>
+        <div class="note"><strong>Observação:</strong> regras específicas variam conforme estatutos, códigos de ética e provimentos de cada país/ordem profissional.</div>
+      </section>
+
+      <!-- MERCADO -->
+      <section class="card" id="mercado">
+        <h2>6. Mercado de Trabalho Jurídico</h2>
+        <p class="sub">Setores, formatos de atuação e tendências.</p>
+        <div class="grid-2">
+          <div>
+            <h3>6.1. Formatos de atuação</h3>
+            <ul>
+              <li>Escritórios de advocacia (boutiques, full service, nichados).</li>
+              <li>Departamento jurídico interno (in-house counsel).</li>
+              <li>Consultoria e compliance.</li>
+              <li>Carreiras públicas: magistratura, Ministério Público, Defensoria.</li>
+              <li>Academia e pesquisa jurídica.</li>
+            </ul>
+            <h3>6.2. Competências valorizadas</h3>
+            <ul>
+              <li>Redação jurídica clara e objetiva.</li>
+              <li>Negociação e gestão de conflitos.</li>
+              <li>Raciocínio analítico e domínio probatório.</li>
+              <li>Gestão de projetos e tecnologia jurídica (legal ops).</li>
+              <li>Inglês jurídico e conhecimento setorial do cliente.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>6.3. Tendências</h3>
+            <ul>
+              <li>Automação de tarefas repetitivas e uso de IA de apoio.</li>
+              <li>Resolução adequada de conflitos (mediação e arbitragem).</li>
+              <li>ESG e conformidade regulatória transversal.</li>
+              <li>Proteção de dados e cibersegurança.</li>
+            </ul>
+            <h3>6.4. Remuneração (fatores)</h3>
+            <p>Varia segundo região, porte do cliente, complexidade da matéria, senioridade e modelo de cobrança (hora, êxito, valor fixo ou híbrido).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROCEDIMENTOS -->
+      <section class="card" id="procedimentos">
+        <h2>7. Procedimentos Essenciais</h2>
+        <p class="sub">Visão geral dos fluxos mais comuns.</p>
+        <div class="grid-2">
+          <div>
+            <h3>7.1. Processo civil (fluxo típico)</h3>
+            <ol>
+              <li>Petição inicial (pedidos e fundamentos).</li>
+              <li>Citação e defesa (contestação, reconvenção, preliminares).</li>
+              <li>Saneamento e provas (documentos, testemunhas, perícia).</li>
+              <li>Sentença (mérito ou extinção) e recursos cabíveis.</li>
+              <li>Cumprimento de sentença/execução.</li>
+            </ol>
+            <h3>7.2. Processo penal (síntese)</h3>
+            <ol>
+              <li>Inquérito e oferecimento de denúncia/queixa.</li>
+              <li>Instrução (oitivas e provas), decisões cautelares.</li>
+              <li>Sentença e recursos; execução penal.</li>
+            </ol>
+          </div>
+          <div>
+            <h3>7.3. Métodos adequados de solução de conflitos</h3>
+            <ul>
+              <li>Negociação assistida e mediação: foco em consenso.</li>
+              <li>Arbitragem: decisão por árbitro, com confidencialidade e celeridade.</li>
+              <li>Dispute boards em contratos complexos.</li>
+            </ul>
+            <h3>7.4. Contratos (boas práticas)</h3>
+            <ul>
+              <li>Clareza e definição de termos; anexos técnicos.</li>
+              <li>Matriz de riscos e garantias.</li>
+              <li>Mecanismos de revisão e resolução de disputas.</li>
+              <li>Conformidade regulatória e proteção de dados.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- MODELOS -->
+      <section class="card" id="modelos">
+        <h2>8. Modelos e Estruturas de Documentos</h2>
+        <p class="sub">Exemplos simplificados para fins informativos.</p>
+
+        <h3>8.1. Estrutura típica de petição inicial (civil)</h3>
+        <pre class="kbd">Excelentíssimo(a) Senhor(a) Doutor(a) Juiz(a) de Direito da ___ Vara ___ da Comarca de ___
+
+[Parte autora], [qualificação], por intermédio de seu advogado [OAB ___], com endereço profissional [___],
+vem propor AÇÃO DE [título] em face de [parte ré], pelos fatos e fundamentos a seguir:
+
+1) Dos fatos
+2) Do direito
+3) Dos pedidos
+   a) ...
+   b) ...
+   c) ...
+4) Provas
+5) Valor da causa
+Termos em que, pede deferimento.
+[Local], [data]. [Assinatura / OAB]</pre>
+
+        <h3>8.2. Cláusulas essenciais em contrato de honorários</h3>
+        <ul>
+          <li>Objeto (serviços cobertos e fora de escopo).</li>
+          <li>Honorários (fixo, êxito, hora, híbrido) e despesas.</li>
+          <li>Prazo, rescisão, confidencialidade e foro.</li>
+          <li>Proteção de dados e conformidade.</li>
+        </ul>
+        <div class="note"><strong>Importante:</strong> sempre adaptar ao caso concreto e à legislação aplicável. Os exemplos são informativos.</div>
+      </section>
+
+      <!-- GLOSSÁRIO -->
+      <section class="card" id="glossario">
+        <h2>9. Glossário Essencial</h2>
+        <dl>
+          <dt>Acórdão</dt><dd>Decisão colegiada proferida por tribunal.</dd>
+          <dt>Alvará</dt><dd>Autorização judicial para prática de ato.</dd>
+          <dt>Conflito de interesses</dt><dd>Situação em que a atuação pode prejudicar a lealdade ao cliente.</dd>
+          <dt>Jurisprudência</dt><dd>Conjunto de decisões reiteradas dos tribunais sobre determinado tema.</dd>
+          <dt>Prescrição</dt><dd>Perda da pretensão de exigir em juízo, pelo decurso do tempo.</dd>
+          <dt>Decadência</dt><dd>Extinção de um direito pelo não exercício dentro do prazo legal.</dd>
+          <dt>Recurso</dt><dd>Meio de impugnação de decisões, para reexame por órgão hierarquicamente superior.</dd>
+          <dt>Sucumbência</dt><dd>Encargos fixados em desfavor da parte vencida (honorários/custas, conforme o sistema).</dd>
+        </dl>
+      </section>
+
+      <!-- FAQ -->
+      <section class="card" id="faq">
+        <h2>10. Perguntas Frequentes</h2>
+        <button class="acc-item" aria-expanded="false">Advogados só atuam em processos?</button>
+        <div class="acc-panel">
+          <p>Não. A atuação consultiva e preventiva é central: análise contratual, mapeamento de riscos, compliance, mediação e treinamento.</p>
+        </div>
+
+        <button class="acc-item" aria-expanded="false">O que diferencia mediação de arbitragem?</button>
+        <div class="acc-panel">
+          <p>A mediação busca acordo consensual com auxílio de terceiro imparcial; a arbitragem resulta em decisão proferida por árbitro(s), com força vinculante.</p>
+        </div>
+
+        <button class="acc-item" aria-expanded="false">Publicidade na advocacia é livre?</button>
+        <div class="acc-panel">
+          <p>Não. Em geral, admite-se publicidade informativa, vedadas práticas de captação indevida e autopromoção sensacionalista. Verifique normas da sua ordem profissional.</p>
+        </div>
+      </section>
+
+      <!-- AVISO -->
+      <section class="card" id="aviso">
+        <h2>11. Aviso de Responsabilidade</h2>
+        <p>Este site possui caráter <strong>informativo</strong>. As informações aqui contidas não substituem a consulta a um(a) profissional habilitado(a) nem constituem aconselhamento jurídico específico para casos concretos.</p>
+      </section>
+
+    </article>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="fine">© <span id="year"></span> Advoca+ — Informações sobre Advocacia.</div>
+      <div class="fine">Conteúdo educativo. Alguns termos e procedimentos podem variar conforme legislação e regulamentos locais.</div>
+    </div>
+  </footer>
+
+  <!-- To top -->
+  <button id="toTop" class="to-top" aria-label="Voltar ao topo">↑</button>
+
+  <!-- JS EMBUTIDO: TOC, BUSCA, ACORDEÃO, SCROLL -->
+  <script>
+    // Ano no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Construção automática do TOC
+    (function buildTOC(){
+      const toc = document.getElementById('toc');
+      const content = document.getElementById('content');
+      const headings = content.querySelectorAll('h2');
+      headings.forEach(h => {
+        if(!h.id){
+          h.id = h.textContent.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-À-ú]/g,'');
+        }
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent;
+        li.appendChild(a);
+        toc.appendChild(li);
+      });
+    })();
+
+    // Busca por palavra-chave (mostra/oculta cards)
+    (function enableSearch(){
+      const input = document.getElementById('search');
+      const cards = document.querySelectorAll('article .card');
+      input.addEventListener('input', () => {
+        const q = input.value.trim().toLowerCase();
+        cards.forEach(c => {
+          const text = c.innerText.toLowerCase();
+          c.style.display = q ? (text.includes(q) ? 'block' : 'none') : 'block';
+        });
+      });
+    })();
+
+    // Acordeão simples para o FAQ
+    (function faqAccordion(){
+      document.querySelectorAll('.acc-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          const panel = btn.nextElementSibling;
+          panel.style.display = expanded ? 'none' : 'block';
+        });
+      });
+    })();
+
+    // Scroll suave para âncoras
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        if(id && id.length > 1){
+          const el = document.querySelector(id);
+          if(el){
+            e.preventDefault();
+            el.scrollIntoView({behavior:'smooth', block:'start'});
+          }
+        }
+      });
+    });
+
+    // Botão voltar ao topo
+    (function toTop(){
+      const btn = document.getElementById('toTop');
+      window.addEventListener('scroll', () => {
+        btn.style.display = window.scrollY > 500 ? 'block' : 'none';
+      });
+      btn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    })();
+  </script>
+</body>
+</html>
